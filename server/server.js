@@ -9,7 +9,7 @@ app.use(express.json()); // JSON 요청 본문을 파싱하기 위해
 const logYn = true;
 
 const config = {
-  server: "localhost",
+  server: "61.101.193.131",
   port: 1433,
   database: "testdb",
   user: "tester",

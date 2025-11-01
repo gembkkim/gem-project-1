@@ -35,6 +35,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@react-native/metro-config": "0.82.0"
+    "@react-native/metro-config": "0.82.0",
+    "@react-native-community/cli": "latest"
   }
 }

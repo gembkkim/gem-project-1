@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import { PaperProvider } from "react-native-paper";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 // 응용 화면들...
 import LoginScreen from "./screens/LoginScreen";
@@ -15,7 +15,7 @@ import TestScreen from "./screens/TestScreen";
 import StyleScreen from "./screens/StyleScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserInfoScreen from "./screens/UserInfoScreen";
-import RNCameraScreen from "./screens/RNCameraScreen";
+// import RNCameraScreen from "./screens/RNCameraScreen";
 
 // 예시 화면 컴포넌트
 function HomeScreen() {

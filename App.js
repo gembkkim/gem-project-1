@@ -19,7 +19,6 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    // <PaperProvider theme={theme}>
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="UserList">
@@ -66,6 +65,5 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-    // </PaperProvider>
   );
 }

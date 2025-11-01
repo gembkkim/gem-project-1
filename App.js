@@ -15,44 +15,14 @@ import TestScreen from "./screens/TestScreen";
 import StyleScreen from "./screens/StyleScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserInfoScreen from "./screens/UserInfoScreen";
-// import RNCameraScreen from "./screens/RNCameraScreen";
-
-// 예시 화면 컴포넌트
-function HomeScreen() {
-  return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View>
-      <Text>Settings</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    // <PaperProvider theme={theme}>
     <Provider store={store}>
-    <NavigationContainer>
-    {/* <Tab.Navigator initialRouteName="Home">
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator> */}
-      <Stack.Navigator initialRouteName="UserList">
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="RNCamera"
-            component={RNCameraScreen}
-          />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="UserList">
           <Stack.Screen
             options={{ headerShown: false }}
             name="UserInfo"
@@ -94,17 +64,7 @@ export default function App() {
             component={MainScreen}
           />
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     </Provider>
-    // </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

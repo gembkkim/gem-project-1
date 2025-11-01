@@ -42,12 +42,12 @@ export default function App() {
   return (
     // <PaperProvider theme={theme}>
     <Provider store={store}>
-    <NavigationContainer>
-    {/* <Tab.Navigator initialRouteName="Home">
+      <NavigationContainer>
+        {/* <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator> */}
-      <Stack.Navigator initialRouteName="UserList">
+        <Stack.Navigator initialRouteName="UserList">
           <Stack.Screen
             options={{ headerShown: false }}
             name="RNCamera"
@@ -94,7 +94,7 @@ export default function App() {
             component={MainScreen}
           />
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     </Provider>
     // </PaperProvider>
   );

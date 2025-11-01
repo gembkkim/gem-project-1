@@ -41,13 +41,13 @@ export default function App() {
 
   return (
     // <PaperProvider theme={theme}>
-    // <Provider store={store}>
+    <Provider store={store}>
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home">
+    {/* <Tab.Navigator initialRouteName="Home">
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-      {/* <Stack.Navigator initialRouteName="UserList">
+      </Tab.Navigator> */}
+      <Stack.Navigator initialRouteName="UserList">
           <Stack.Screen
             options={{ headerShown: false }}
             name="RNCamera"
@@ -93,9 +93,9 @@ export default function App() {
             name="Main"
             component={MainScreen}
           />
-        </Stack.Navigator> */}
+        </Stack.Navigator>
     </NavigationContainer>
-    // </Provider>
+    </Provider>
     // </PaperProvider>
   );
 }

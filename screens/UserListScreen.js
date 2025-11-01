@@ -206,7 +206,6 @@ const UserListScreen = ({ navigation }) => {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  backgroundColor: "yellow",
                 },
               ]}
             >

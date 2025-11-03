@@ -1,13 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import MainScreen from "./screens/MainScreen";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import { PaperProvider } from "react-native-paper";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 // 응용 화면들...
+import MainScreen from "./screens/MainScreen";
 import LoginScreen from "./screens/LoginScreen";
 import BackendUsersScreen from "./screens/BackendUsersScreen";
 import BackendAspUsersScreen from "./screens/BackendAspUsersScreen";

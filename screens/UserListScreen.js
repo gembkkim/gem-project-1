@@ -1,4 +1,10 @@
-import { FlatList, KeyboardAvoidingView, Alert, View } from "react-native";
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  Alert,
+  View,
+  Platform,
+} from "react-native";
 import {
   Button,
   TextInput,
@@ -7,6 +13,7 @@ import {
   MD3LightTheme,
   PaperProvider,
   IconButton,
+  Tooltip,
 } from "react-native-paper";
 import { asp } from "../apis/apiService";
 import React, { useState, useEffect } from "react";
@@ -120,26 +127,36 @@ const UserListScreen = ({ navigation }) => {
         {item.sex_ty}, Note: {item.note} */}
         {item.user_id} {item.name}
       </Text>
-      <IconButton
-        icon={() => <UpdateIcon />}
-        style={{ width: "13%", backgroundColor: "deepskyblue" }}
-        mode="contained"
-        onPress={() =>
-          navigation.navigate("UserInfo", {
-            user_id: item.user_id,
-            name: item.name,
-            age: item.age,
-            sex_ty: item.sex_ty,
-            note: item.note,
-          })
-        }
-      />
-      <IconButton
-        icon={() => <DeleteIcon />}
-        style={{ width: "13%", backgroundColor: "deeppink" }}
-        mode="contained"
-        onPress={() => handleDeleteRow(item.user_id)}
-      />
+      <Tooltip
+        style={{ width: 40, backgroundColor: "deepskyblue" }}
+        title="편집"
+      >
+        <IconButton
+          // icon={() => <UpdateIcon />}
+          icon="circle-edit-outline"
+          iconColor="black"
+          mode="contained"
+          size={24}
+          onPress={() =>
+            navigation.navigate("UserInfo", {
+              user_id: item.user_id,
+              name: item.name,
+              age: item.age,
+              sex_ty: item.sex_ty,
+              note: item.note,
+            })
+          }
+        />
+      </Tooltip>
+      <Tooltip style={{ width: 40, backgroundColor: "deeppink" }} title="삭제">
+        <IconButton
+          // icon={() => <DeleteIcon />}
+          icon="delete-circle-outline"
+          iconColor="black"
+          mode="contained"
+          onPress={() => handleDeleteRow(item.user_id)}
+        />
+      </Tooltip>
     </View>
   );
 
@@ -180,19 +197,13 @@ const UserListScreen = ({ navigation }) => {
               />
             </View>
             <View style={[styles.viewColumnContainer, { marginBottom: 100 }]}>
-              {/* <View style={[styles.viewColumnContainer, {paddingBottom: 100}]}> */}
-              {/* <View style={[styles.viewColumnContainer, {}]}> */}
               <FlatList
-                // contentContainerStyle={{
-                //   display: "flex",
-                //   flexGrow: 1,
-                // }}
                 data={items}
-                keyboardShouldPersistTaps="handled"
+                // keyboardShouldPersistTaps="handled"
                 keyExtractor={(item) => item.user_id}
-                ItemSeparatorComponent={() => (
-                  <View style={styles.renderSeparator} />
-                )}
+                // ItemSeparatorComponent={() => (
+                //   <View style={styles.renderSeparator} />
+                // )}
                 renderItem={renderItem}
               />
             </View>
@@ -212,9 +223,9 @@ const UserListScreen = ({ navigation }) => {
               <Button
                 icon="plus-circle"
                 style={{
-                  // height: 50,
-                  // marginTop: 20,
-                  // marginBottom: 20,
+                  height: 50,
+                  marginTop: 20,
+                  marginBottom: 20,
                   alignItems: "center",
                   justifyContent: "center",
                 }}

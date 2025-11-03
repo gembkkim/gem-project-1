@@ -6,7 +6,7 @@ const app = express();
 app.use(cors()); // 모든 도메인에서의 요청 허용
 app.use(express.json()); // JSON 요청 본문을 파싱하기 위해
 
-const logYn = true;
+const logYn = false;
 
 const config = {
   server: "61.101.193.131",
@@ -225,17 +225,17 @@ app.post("/asp", async (req, res) => {
   // 매개변수와 함께 Stored Procedure 를 실행한 결과값을  조회 및 반환한다.
   // req : { sp_name: 'asp_users_u', user_id = 'gembkkim', ... }
   // res :
-  const path = "□ " + req.body.sp_name + " ::: ";
+  const path = "□□□ " + req.body.sp_name + " ::: ";
   const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
   const time = new Date().toTimeString().split(" ")[0];
-  console.log(
-    "path: " + path + "--------------------------- " + date + " " + time
-  );
-  console.log(path + ">>>>> req.body: " + JSON.stringify(req.body));
+  if (logYn)
+    console.log(
+      "path: " + path + "--------------------------- " + date + " " + time
+    );
+  if (logYn) console.log(path + "req.body: " + JSON.stringify(req.body));
 
   const pool = await sql.connect(config);
 
-  if (logYn) console.log(path + "start - argument");
   if (logYn)
     console.log(path + "sp call : nsp_get_sp_arguments  " + req.body.sp_name);
   var args = pool
@@ -255,7 +255,7 @@ app.post("/asp", async (req, res) => {
   (await args).recordset.forEach(function (item) {
     if (logYn) console.log(item.argument.replace("@", ""));
     let argu = item.argument.replace("@", "");
-    console.log("● " + req.body[argu]);
+    if (logYn) console.log("● " + req.body[argu]);
   });
 
   if (logYn) console.log(path + "start");
@@ -362,7 +362,7 @@ app.post("/asp", async (req, res) => {
     //
     await data
       .then((res1) => {
-        if (logYn) {
+        if (logYn || true) {
           console.log(
             path + "res1.recordset: " + JSON.stringify(res1.recordset)
           );

@@ -1,4 +1,10 @@
-import { Alert, BackHandler, KeyboardAvoidingView, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  BackHandler,
+  KeyboardAvoidingView,
+  View,
+} from "react-native";
 import {
   Button,
   TextInput,
@@ -38,7 +44,7 @@ const SEX_TY_OPTIONS = [
 const UserInfoScreen = ({ route }) => {
   const thisName = "▶ " + UserInfoScreen.name + " ::: ";
   const navigation = useNavigation();
-  console.log(thisName + "route.params: " + JSON.stringify(route.params));
+  // console.log(thisName + "route.params: " + JSON.stringify(route.params));
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(route.params.user_id || "");
@@ -52,12 +58,12 @@ const UserInfoScreen = ({ route }) => {
 
   useEffect(() => {
     if (route.params.user_id.toString() !== "") setEnableInputYn(false);
-    handleInsertRowOrUpdateRow;
+    // handleInsertRowOrUpdateRow;
     // 백 버튼 누름을 처리하는 사용자 정의 로직 : 기본 동작(예: 앱 종료)을 방지하려면 true를 반환, 기본 동작을 허용하려면 false를 반환
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      Alert.alert("알림", "우상단 뒤로가기 버튼을 사용 하십시오.");
-      return true;
-    });
+    // BackHandler.addEventListener("hardwareBackPress", () => {
+    //   Alert.alert("알림", "우상단 뒤로가기 버튼을 사용 하십시오.");
+    //   return true;
+    // });
   }, []);
 
   const onChangeTextUserId = (userId) => {
@@ -75,9 +81,13 @@ const UserInfoScreen = ({ route }) => {
 
   const handleInsertRowOrUpdateRow = async () => {
     setLoading(true);
+    console.log("age: " + age);
 
     if (userId.toString() === "") {
-      console.log(thisName + "사용자ID가 입력되지 않았습니다.");
+      console.log(
+        thisName +
+          "handleInsertRowOrUpdateRow ▶▶▶ 사용자ID가 입력되지 않았습니다."
+      );
       return;
     }
 
@@ -90,18 +100,54 @@ const UserInfoScreen = ({ route }) => {
         sex_ty: sexTy,
         note: note,
       };
-      console.log(thisName + "args: " + JSON.stringify(args));
+      console.log(
+        thisName +
+          "handleInsertRowOrUpdateRow ▶▶▶ args: " +
+          JSON.stringify(args)
+      );
       const data = await asp(args);
-      setItems(data);
       console.log(
         thisName + "handleInsertRowOrUpdateRow:" + JSON.stringify(data)
       );
-      //fetchItems(); // 목록 갱신
+      handleSelectRow();
     } catch (err) {
       console.err("Failed to update item", err);
     } finally {
       setLoading(false);
-      console.log(thisName + "사용자 등록이 완료 되었습니다.");
+      console.log(
+        thisName +
+          "handleInsertRowOrUpdateRow ▶▶▶ 사용자 등록이 완료 되었습니다."
+      );
+    }
+  };
+
+  useEffect(() => {
+    console.log(
+      thisName + "handleSelectRow ▶▶▶ items: " + JSON.stringify(items)
+    );
+    // setUserId(items.user_id);
+    // setName(items.name + "yyy");
+    // setAge(items.age);
+    // setSexTy(items.sex_ty);
+    // setNote(items.note);
+  }, [items]);
+
+  const handleSelectRow = async () => {
+    setLoading(true);
+    try {
+      const args = {
+        sp_name: "asp_users_k",
+        user_id_s: userId,
+      };
+      const data = await asp(args);
+      setItems(data);
+    } catch (err) {
+      console.err("Failed to select item", err);
+    } finally {
+      setLoading(false);
+      console.log(
+        thisName + "handleSelectRow ▶▶▶ 사용자 조회가 완료 되었습니다."
+      );
     }
   };
 
@@ -109,7 +155,7 @@ const UserInfoScreen = ({ route }) => {
     <PaperProvider theme={theme}>
       <SafeAreaView style={{ flex: 1 }}>
         <View style={[styles.viewRowContainer, {}]}>
-          <View style={{ width: "*", backgroundColor: "darkblue" }}>
+          <View style={{ backgroundColor: "darkblue" }}>
             <IconButton
               icon="arrow-left"
               iconColor="white"
@@ -121,7 +167,7 @@ const UserInfoScreen = ({ route }) => {
           <Text
             style={{
               fontSize: 24,
-              width: "84%",
+              width: "100%",
               height: 55,
               paddingTop: 10,
               margin: 0,
@@ -133,7 +179,6 @@ const UserInfoScreen = ({ route }) => {
             사용자 정보
           </Text>
         </View>
-        {/* </View> */}
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
@@ -209,7 +254,7 @@ const UserInfoScreen = ({ route }) => {
               <Button
                 icon="plus-circle"
                 style={{
-                  // height: 50,
+                  height: 50,
                   // marginTop: 20,
                   // marginBottom: 20,
                   alignItems: "center",

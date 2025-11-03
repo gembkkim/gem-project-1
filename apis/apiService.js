@@ -1,7 +1,7 @@
 // apiService.js (API 호출 로직)
 import { API_BASE_URL } from "../constants/constants";
 
-const logYn = true;
+const logYn = false;
 
 // 0. Stored Procedure 처리
 const executeAsp = async (args) => {
@@ -151,7 +151,7 @@ const aspUsers = async (args) => {
 
 // 범용 SP 호출 : asp*
 const asp = async (args) => {
-  const funcName = "■ " + "asp";
+  const funcName = "■■ " + "asp";
   if (logYn) console.log(funcName + "::: ::: args: " + JSON.stringify(args));
   try {
     const response = await fetch(API_BASE_URL + "/asp", {
@@ -167,7 +167,8 @@ const asp = async (args) => {
 
     // 서버가 업데이트된 객체를 반환한다고 가정
     const result = await response.json();
-    if (logYn) console.log(funcName + "::: result: " + JSON.stringify(result));
+    if (logYn || true)
+      console.log(funcName + "::: result: " + JSON.stringify(result));
     return result;
   } catch (error) {
     if (logYn) console.error(funcName + "::: Item Error: ", error);
